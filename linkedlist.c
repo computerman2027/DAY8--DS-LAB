@@ -52,10 +52,6 @@ void display()
 	}
 	while(temp!=NULL)
 	{
-//		if(temp->next!=NULL)
-//		printf("%d -> ",temp->data);
-//		else
-//		printf("%d\n",temp->data);
 		printf(temp->next!=NULL?"%d -> ":"%d\n",temp->data);
 		temp=temp->next;
 	}
