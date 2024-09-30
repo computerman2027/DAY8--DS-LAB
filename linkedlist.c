@@ -42,6 +42,58 @@ void insertAtLast(int item)
 	}
 }
 
+void insertafter(int item,int after)
+{
+	if(head==NULL)
+	{
+		printf("LinkedList is empty\n");
+	}	
+	Node* temp = head;
+	while(temp!=NULL)
+	{
+		if(temp->data==after)
+		{
+			Node* newnode = createnode(item);
+			newnode->next=temp->next;
+			temp->next=newnode;
+			return;
+		}
+		temp=temp->next;
+	}
+	printf("AFTER element not present\n");
+}
+
+void insertbefore(int item,int before)
+{
+	if(head==NULL)
+	{
+		printf("LinkedList is empty\n");
+	}
+	
+	if(head->data==before)
+	{
+		Node* newnode = createnode(item);
+		newnode->next=head;
+		head=newnode;
+	}
+	else
+	{
+		Node* temp = head;
+		while(temp->next!=NULL)
+		{
+			if(temp->next->data==before)
+			{
+				Node* newnode = createnode(item);
+				newnode->next=temp->next;
+				temp->next=newnode;
+				return;
+			}
+			temp=temp->next;
+		}
+		printf("BEFORE element not found");
+	}
+}
+
 void display()
 {
 	Node* temp=head;
@@ -60,13 +112,42 @@ void display()
 
 int main()
 {
-	int i,term;
-	for(i=0;i<5;i++)
+	int ch,term,term2;
+	while(1)
 	{
-		printf("Enter a number : ");
-		scanf("%d",&term);
-		insertAtFirst(term);
+		printf("MENU\n1. Insert first\n2. Insert last\n3. insert after a particular node\n4. Insert before a particular node\n5. Display\n6. Exit\nEnter your choice : ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:printf("Enter number to be inserted : ");
+			scanf("%d",&term);
+			insertAtFirst(term);
+			break;
+			case 2:printf("Enter number to be inserted : ");
+			scanf("%d",&term);
+			insertAtLast(term);
+			break;
+			case 3:printf("Enter number to be inserted : ");
+			scanf("%d",&term);
+			printf("Enter number after which it need to be inserted : ");
+			scanf("%d",&term2);
+			insertafter(term,term2);
+			break;
+			case 4:printf("Enter number to be inserted : ");
+			scanf("%d",&term);
+			printf("Enter number before which it need to be inserted : ");
+			scanf("%d",&term2);
+			insertbefore(term,term2);
+			break;
+			case 5:
+				display();
+				break;
+			case 6:
+				printf("END OF PROGRAM\n");
+				return 0;
+			default:
+				printf("INVALID SELECTION\n");
+		}
 	}
-	display();
 	return 0;
 }
