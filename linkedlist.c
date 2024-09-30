@@ -48,14 +48,15 @@ void display()
 	if(head==NULL)
 	{
 		printf("LINKED LIST EMPTY\n");
-		return 0;
+		return;
 	}
 	while(temp!=NULL)
 	{
-		if(temp->next!=NULL)
-		printf("%d -> ",temp->data);
-		else
-		printf("%d\n",temp->data);
+//		if(temp->next!=NULL)
+//		printf("%d -> ",temp->data);
+//		else
+//		printf("%d\n",temp->data);
+		printf(temp->next!=NULL?"%d -> ":"%d\n",temp->data);
 		temp=temp->next;
 	}
 	return;
