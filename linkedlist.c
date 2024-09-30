@@ -94,6 +94,100 @@ void insertbefore(int item,int before)
 	}
 }
 
+void deleteFirst()
+{
+	if(head==NULL)
+	{
+		printf("Linked list empty nothing to delete\n");
+		return;
+	}
+	Node* del=head;
+	head=head->next;
+	free(del);
+}
+
+void deleteLast()
+{
+	if(head==NULL)
+	{
+		printf("Linked list empty nothing to delete\n");
+		return;
+	}
+	else if(head->next==NULL)
+	{
+		free(head);
+		head=NULL;
+	}
+	else
+	{
+		Node* temp=head;
+		while(temp->next->next!=NULL)
+		{
+			temp=temp->next;
+		}
+		Node* del=temp->next;
+		temp->next=NULL;
+		free(del);
+	}
+}
+
+void deleteAfter(int after)
+{
+	if(head==NULL)
+	{
+		printf("Linked list empty nothing to delete\n");
+		return;
+	}
+	else
+	{
+		Node* temp=head;
+		while(temp->next!=NULL)
+		{
+			if(temp->data==after)
+			{
+				Node* del=temp->next;
+				temp->next=temp->next->next;
+				free(del);
+				return;
+			}
+			temp=temp->next;
+		}
+		if(temp->data!=after)
+		{
+			printf("AFTER value not found\n");
+		}
+	}
+}
+
+void deleteBefore(int before)
+{
+	if(head==NULL)
+	{
+		printf("Linked list empty nothing to delete\n");
+		return;
+	}
+	else if(head->next!=NULL && head->next->data==before)
+	{
+		head=head->next;
+	}
+	else
+	{
+		Node* temp=head;
+		while(temp->next->next !=NULL)
+		{
+			if(temp->next->next->data==before)
+			{
+				Node* del=temp->next;
+				temp->next=temp->next->next;
+				free(del);
+				return;
+			}
+			temp=temp->next;
+		}
+		printf("BEFORE value not found\n");
+	}
+}
+
 void display()
 {
 	Node* temp=head;
@@ -115,7 +209,7 @@ int main()
 	int ch,term,term2;
 	while(1)
 	{
-		printf("MENU\n1. Insert first\n2. Insert last\n3. insert after a particular node\n4. Insert before a particular node\n5. Display\n6. Exit\nEnter your choice : ");
+		printf("MENU\n1. Insert first\n2. Insert last\n3. insert after a particular node\n4. Insert before a particular node\n5. Delete at first\n6. Delete at last\n7. Delete after an element\n8. Delete before an element\n9. Display\n10. Exit\nEnter your choice : ");
 		scanf("%d",&ch);
 		switch(ch)
 		{
@@ -140,9 +234,25 @@ int main()
 			insertbefore(term,term2);
 			break;
 			case 5:
-				display();
+				deleteFirst();
 				break;
 			case 6:
+				deleteLast();
+				break;
+			case 7:
+				printf("Enter value after which it will be deleted : ");
+				scanf("%d",&term2);
+				deleteAfter(term2);
+				break;
+			case 8:
+				printf("Enter value before which it will be deleted : ");
+				scanf("%d",&term2);
+				deleteBefore(term2);
+				break;	
+			case 9:
+				display();
+				break;
+			case 10:
 				printf("END OF PROGRAM\n");
 				return 0;
 			default:
