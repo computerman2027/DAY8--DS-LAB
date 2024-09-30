@@ -173,6 +173,10 @@ void deleteBefore(int before)
 	else
 	{
 		Node* temp=head;
+		if(head->data==before)
+		{
+			return;
+		}
 		while(temp->next->next !=NULL)
 		{
 			if(temp->next->next->data==before)
